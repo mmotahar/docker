@@ -13,6 +13,7 @@ RUN add-apt-repository \
   wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
   apt-key add -
 
+#  Dependencias de Odoo y paquetes varios
 RUN apt-get update && apt-get install \
   net-tools \
   git \
@@ -46,6 +47,7 @@ RUN apt-get update && apt-get install \
   python-passlib \
   python-gevent \
   locales \
+  postgresql-client-9.6 \
   python-webdav \
   python-gdata \
   xfonts-75dpi \
@@ -64,19 +66,48 @@ RUN apt-get update && apt-get install \
   python-pypdf \
   python-babel \
   python-zsi \
-  postgresql-client-9.6 \
   python-pypdf2 \
   node-clean-css \
   node-less \
   -y
 
+#  Librerías necesarias para ciertos repositorios
+RUN pip install -U pip
+RUN pip install \
+  openupgradelib \
+  odoorpc \
+  unidecode \
+  zeep \
+  pandas \
+  psycogreen \
+  xlrd \
+  ofxparse \
+  cssutils \
+  twilio \
+  zklib \
+  pyzk \
+  backports.functools_lru_cache \
+  bokeh \
+  dbfpy
+
+#  Creo el usuario odoo y cambio el propietario a la carpeta odoo
+RUN mkdir /var/log/odoo; mkdir /var/lib/odoo;
+RUN useradd --home /opt --shell /bin/bash odoo
+RUN chown -R odoo:odoo /opt; chown -R odoo:odoo /var/lib/odoo; \
+  chown -R odoo:odoo /var/log/odoo;
+
+#  Cambio al usuario odoo y clono el repositorio de Odoo 8
+USER odoo
+WORKDIR /opt/
+RUN git clone https://github.com/odoo/odoo.git -b 8.0
+
 #  Paquete wkhtmltopdf
-RUN mkdir /opt/utilities;
+RUN mkdir /opt/utilities
 WORKDIR /opt/utilities
 RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
+USER root
 RUN dpkg -i wkhtmltox-0.12.1_linux-trusty-amd64.deb
+USER odoo
+WORKDIR /
 
-WORKDIR /opt/
-RUN git clone https://github.com/OCA/OCB.git -b 8.0
-
-#  TODO: crear usuario odoo y cambiar propietario a la carpeta OCB
+#  TODO: redirigir puertos
