@@ -1,0 +1,8 @@
+Host *
+  StrictHostKeyChecking no
+  PubkeyAcceptedKeyTypes +ssh-rsa
+  PasswordAuthentication no
+  User git
+  ForwardAgent yes
+  IdentityFile /opt/.ssh/id_rsa
+  port 22022
