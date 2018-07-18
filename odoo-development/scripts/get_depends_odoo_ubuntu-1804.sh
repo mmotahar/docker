@@ -29,4 +29,17 @@ pip install simplejson \
     ofxparse \
     odoorpc \
     xlrd \
-    pandas
+    pandas \
+    Babel \
+    Werkzeug \
+    decorator \
+    pyyaml \
+    Mako \
+    Jinja2 \
+    docutils \
+    gevent \
+    psycogreen \
+    gdata \
+    workalendar \
+    egenix-mx-base \
+    pycrypto
