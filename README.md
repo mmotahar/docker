@@ -10,9 +10,11 @@ Cada una de las versiones de Odoo tendrá disponible la gran mayoría de reposit
 
 Requisitos previos
 ==================
-
-- **docker**: versión 18 o superior.
+- **docker-ce**: versión 18 o superior.
 - **docker-compose**: versión 1.23 o superior.
+- **SO Linux**: aunque los contenedores de Odoo corren sobre Debian de forma independiente al host, los scripts para obtener los repositorios se ejecutan directamente en el host, con lo que es necesario arrancar los contenedores con una máquina corriendo bajo un SO Linux. Concretamente las pruebas han sido realizadas en Ubuntu 16.04 y 18.10 LTS.
+
+**Nota:** En la raiz del repositorio está localizado un script llamado **get_docker_ce.sh**, el cual instala en el equipo las versiones requeridas de **docker-ce** y **docker-compose**.
 
 Autor
 =====
