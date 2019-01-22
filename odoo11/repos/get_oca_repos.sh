@@ -1,7 +1,7 @@
 #!/bin/bash
-### download repositorios
+
 folderRepos=`pwd`
-folderOca="$folderRepos/repos/oca"
+folderOca="$folderRepos/oca"
 ocaBranch='11.0'
 
 function getModulesOca()

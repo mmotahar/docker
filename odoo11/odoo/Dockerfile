@@ -27,8 +27,8 @@ RUN echo "odoo ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 COPY scripts/*.sh /tmp/
 
 RUN chmod 755 /tmp/*.sh
-RUN sh /tmp/changePathOdoo.sh
-RUN sh /tmp/requirementsPython.sh
+RUN sh /tmp/change_path_odoo.sh
+RUN sh /tmp/python_requirements.sh
 
 RUN mkdir -p /var/run/odoo && chown odoo:odoo /var/run/odoo
 RUN sed -i 's/PIDFILE=\/var\/run\/${NAME}.pid/PIDFILE=\/var\/run\/odoo\/${NAME}.pid/g' /etc/init.d/odoo

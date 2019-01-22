@@ -1,20 +1,22 @@
 #!/bin/bash
-##### bajo los modulos
-./getModules.sh
 
-# variables
+# current path
 path=`pwd`
-result=$path
-echo ProjectPath=$result > .env
+echo ProjectPath=$path > .env
 
-### permiso de escritura en la carpeta odoo
-sudo chmod 777 $result/odoo
+# download OCA repositories
+cd $path/repos
+./get_oca_repos.sh
+cd ..
 
-#### #genero docker
+# total permissions for odoo folder
+sudo chmod 777 $path/odoo
+
+# docker building
 docker-compose build --force-rm --parallel
 docker-compose up -d --remove-orphans --force-recreate
 
-### ip's contenedores
+# IP containers
 echo
 echo Las ips de los contenedores son:
 echo

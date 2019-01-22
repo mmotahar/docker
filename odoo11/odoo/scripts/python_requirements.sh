@@ -18,7 +18,6 @@ sudo pip3 install xlsxwriter
 sudo pip3 install xlrd
 sudo pip3 install fdfgen
 sudo pip3 install paramiko
-# sudo pip3 install pycrypto
 sudo pip3 install pycryptodome
 sudo pip3 install pytz
 sudo pip3 install pyOpenSSL
